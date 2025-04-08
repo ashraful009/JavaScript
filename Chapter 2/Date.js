@@ -1,0 +1,34 @@
+var date = new Date();
+var year = date.getFullYear();
+var month = date.getMonth() + 1; // Months are zero-based in JavaScript
+var day = date.getDate();
+var hours = date.getHours();
+var minutes = date.getMinutes();
+var seconds = date.getSeconds();
+var milliseconds = date.getMilliseconds();
+var timezoneOffset = date.getTimezoneOffset(); // in minutes
+var timezoneOffsetHours = Math.floor(Math.abs(timezoneOffset) / 60);
+var timezoneOffsetMinutes = Math.abs(timezoneOffset) % 60;
+var timezoneOffsetSign = timezoneOffset > 0 ? '-' : '+';
+var timezoneOffsetString = timezoneOffsetSign + String(timezoneOffsetHours).padStart(2, '0') + ':' + String(timezoneOffsetMinutes).padStart(2, '0');
+console.log(date);
+console.log('Year:', year);
+console.log('Month:', month);   
+console.log('Day:', day);
+console.log('Hours:', hours);
+console.log('Minutes:', minutes);
+console.log('Seconds:', seconds);
+console.log('Milliseconds:', milliseconds);
+console.log('Timezone Offset:', timezoneOffsetString);
+console.log('Timezone Offset in Minutes:', timezoneOffset);
+console.log('Timezone Offset in Hours:', timezoneOffsetHours);
+console.log('Timezone Offset in Minutes:', timezoneOffsetMinutes);
+console.log('Timezone Offset Sign:', timezoneOffsetSign);
+console.log('Timezone Offset String:', timezoneOffsetString);
+console.log('Date String:', date.toString());
+console.log('Date ISO String:', date.toISOString());
+console.log('Date UTC String:', date.toUTCString());
+console.log('Date Locale String:', date.toLocaleString());
+console.log('Date Locale Date String:', date.toLocaleDateString());
+console.log('Date Locale Time String:', date.toLocaleTimeString());
+console.log(date.toDateString());

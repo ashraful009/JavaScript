@@ -1,0 +1,7 @@
+console.log("Hello World")
+console.log(50+79)
+console.log("9 + 9")
+console.log("9" + "9")
+console.log(9 + 9)
+console.log(9 + "9")
+console.log("The Number is" + 9)

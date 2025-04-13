@@ -6,11 +6,11 @@ console.log(num)
 
 let num = 50;
 
-let greet = function () {
+let greet = function () { // function expression
     console.log('Greeting')
 }
 
-function greetme (greet, fulname){
+function greetme (greet, fulname){ // function declaration
     console.log('hellow', fulname);
     greet()
 }

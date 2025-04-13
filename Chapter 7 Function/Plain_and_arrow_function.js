@@ -42,4 +42,4 @@ let dosum = (a, b) => {
     return a + b;
 }
 
-console.log("Dosum = " + dosum(2, 3));
+console.log("Dosum = " + dosum(2, 3)); // 5 + 3 = 8, 8 + 5 = 13, 2 * 13 = 26, 26 + 5 = 31

@@ -4,7 +4,7 @@ let src = {
     ht: 180,
 };
 
-let dest = {...src};
+let dest = {...src}; // Shallow copy using spread operator
 let dest2 = Object.assign({}, src);
 
 

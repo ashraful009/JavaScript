@@ -176,21 +176,24 @@ app.get('/about', (req, res) => {
     // });
 
     //res.sendStatus(403);
-    res.format({
-        'text/html': () => {
-            res.send('<h1>Hello world</h1>');
-        },
-        'application/json': () => {
-            res.json({ name: 'Ashraful', age: 25 });
-        },
-        'text/plain': () => {
-            res.send('Hello world');
-        },
-        default: () => {
-            res.status(406).send('Not Acceptable');
-        },
-    });
+    // res.format({
+    //     'text/html': () => {
+    //         res.send('<h1>Hello world</h1>');
+    //     },
+    //     'application/json': () => {
+    //         res.json({ name: 'Ashraful', age: 25 });
+    //     },
+    //     'text/plain': () => {
+    //         res.send('Hello world');
+    //     },
+    //     default: () => {
+    //         res.status(406).send('Not Acceptable');
+    //     },
+    // });
 
+    //res.cookie('name', 'Ashraful');
+    res.location('/about/mission');
+    res.end();
 });
 
 // res.statusCode

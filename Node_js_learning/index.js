@@ -242,13 +242,25 @@ const { cloneDeep } = require("lodash")
  // router level middleware
 
 
-const adminRoute = express.Router();
+/*const adminRoute = express.Router();
+const cookieParser = require('cookie-parser');
+adminRoute.use(cookieParser());
+adminRoute.use(express.json());
 
-const logger = (req, res, next) => {
-    console.log(`${new Date(Date.now()).toISOString()} - ${req.method} - ${req.originalUrl} - ${req.protocol} - ${req.ip}`);
-    next();
+const logger = (option) => {
+    return function (req, res, next) {
+        if(option.log) {
+            console.log(`${new Date(Date.now()).toISOString()} - ${req.method} - ${req.originalUrl} - ${req.protocol} - ${req.ip}`);
+            next();
+        }else {
+            throw new Error('Failed to log');
+        }
+        
+    };
+    
+    
 };
-adminRoute.use(logger);
+adminRoute.use(logger({ log: true })); // middleware for admin route
 
 
 adminRoute .get('/dashboard', (req, res) => { 
@@ -265,12 +277,26 @@ app.get('/about', (req, res) => {
     
 });
 
- app.listen(3000, () => {
-     console.log('listening on port 3000'); 
- });
+const errorMiddleware = (err, req, res, next) => {
+    console.log(err.message);
+    res.status(500).send('Something broke!, server error');
+};
 
- //error handling middleware
+adminRoute.use(errorMiddleware); // error handling middleware
 
- //buit-in middleware
+
+
+// built-in middleware
 
  // third-party middleware
+
+
+ app.listen(3000, () => {
+    console.log('listening on port 3000'); 
+}); */
+
+
+
+
+
+

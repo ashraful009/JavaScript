@@ -221,8 +221,8 @@ const { cloneDeep } = require("lodash")
 
  // applicaton level middleware
 
-    const express = require('express');
-    const app = express();
+    // const express = require('express');
+    // const app = express();
 
     // const logger = (req, res, next) => {
     //     console.log(`${new Date(Date.now()).toISOString()} - ${req.method} - ${req.originalUrl} - ${req.protocol} - ${req.ip}`);
@@ -300,3 +300,36 @@ adminRoute.use(errorMiddleware); // error handling middleware
 
 
 
+/// Router /////
+
+
+//  const express = require('express');
+//  const peopleRouter = require('./people');
+//  const app = express();
+
+// app.get('/', (req, res) => {
+//     res.send('This is home page');
+// });
+
+// app.get('/about', (req, res) => {
+//     res.send('This is about page');
+// });
+
+
+// app.use('/people', peopleRouter); // mount the people router on the /people path
+
+// app.listen(3000, () => {
+//     console.log('listening on port 3000');
+// });
+
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('This is home page');
+});
+
+app.listen(3000, () => {
+    console.log('listening on port 3000');
+});

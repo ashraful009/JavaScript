@@ -4,6 +4,8 @@
 // console.log(people.a);
 // people.test();
 
+const { cloneDeep } = require("lodash")
+
 // console.log(_.last(people.people));
 
 // const path = require('path')
@@ -154,9 +156,9 @@
 
 
                              //  Response Object /////
-const express = require('express');
-const app = express();
-app.set('view engine', 'ejs');
+// const express = require('express');
+// const app = express();
+// app.set('view engine', 'ejs');
 
 // res.locals // res.headersSent
 // app.get('/about', (req, res) => {
@@ -169,7 +171,7 @@ app.set('view engine', 'ejs');
 // });
 
 
-app.get('/about', (req, res) => {
+// app.get('/about', (req, res) => {
     // res.json({
     //     name: 'Ashraful',
     //     age: 25,
@@ -192,13 +194,83 @@ app.get('/about', (req, res) => {
     // });
 
     //res.cookie('name', 'Ashraful');
-    res.location('/about/mission');
-    res.end();
-});
+//     res.location('/about/mission');
+//     res.end();
+// });
 
 // res.statusCode
 // res.send()
 
-app.listen(3000, () => {
-    console.log('listening on port 3000');
+// app.listen(3000, () => {
+//     console.log('listening on port 3000');
+// });
+
+
+
+
+
+
+                   // middleware
+
+/* Execute any code 
+ can change req and res object 
+ can end request/response cycle 
+ call next middleware by next() 
+ throw & catch errors*/
+
+
+ // applicaton level middleware
+
+    const express = require('express');
+    const app = express();
+
+    // const logger = (req, res, next) => {
+    //     console.log(`${new Date(Date.now()).toISOString()} - ${req.method} - ${req.originalUrl} - ${req.protocol} - ${req.ip}`);
+    //     next();
+    // };
+    // app.use(logger);
+    // app.get('/about', (req, res) => {
+    //     console.log('Middleware 1');
+        
+    // });
+
+
+    // app.listen(3000, () => {
+    //     console.log('listening on port 3000'); 
+    // });
+
+ // router level middleware
+
+
+const adminRoute = express.Router();
+
+const logger = (req, res, next) => {
+    console.log(`${new Date(Date.now()).toISOString()} - ${req.method} - ${req.originalUrl} - ${req.protocol} - ${req.ip}`);
+    next();
+};
+adminRoute.use(logger);
+
+
+adminRoute .get('/dashboard', (req, res) => { 
+    res.send(' Dashboard');
+ 
 });
+
+
+
+app.use('/admin', adminRoute);
+
+app.get('/about', (req, res) => {
+    console.log('Middleware 1');
+    
+});
+
+ app.listen(3000, () => {
+     console.log('listening on port 3000'); 
+ });
+
+ //error handling middleware
+
+ //buit-in middleware
+
+ // third-party middleware

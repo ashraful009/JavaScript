@@ -324,11 +324,31 @@ adminRoute.use(errorMiddleware); // error handling middleware
 
 
 const express = require('express');
-const app = express();
+const mongoose = require('mongoose');
+const todohandler = require('./route/todoHandler'); // Import the todo handler
 
-app.get('/', (req, res) => {
-    res.send('This is home page');
-});
+
+//express app installation
+const app = express();
+app.use(express.json());
+
+// database connection
+// ...existing code...
+mongoose.connect('mongodb://127.0.0.1/todos')
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
+
+
+//default error handler
+function errorHandler(err, req, res, next) {
+    if (res.headersSent) {
+        return next(err);
+    }
+    res.status(500).json({ Error: err.message });
+}
+
+// application route 
+app.use('/todos', todohandler);
 
 app.listen(3000, () => {
     console.log('listening on port 3000');

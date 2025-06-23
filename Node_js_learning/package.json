@@ -4,6 +4,7 @@
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "lodash": "^4.17.21",
+    "mongoose": "^8.15.0",
     "react": "^19.1.0"
   },
   "devDependencies": {

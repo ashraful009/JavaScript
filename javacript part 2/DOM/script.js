@@ -1,19 +1,16 @@
-const buttons = document.querySelectorAll('.button');
-const body = document.querySelector('body');
-
-buttons.forEach(function(button) {
-    button.addEventListener('click', function(e){
-        if(e.target.id === 'grey'){
-            body.style.backgroundColor = 'grey';
-        }
-        if(e.target.id === 'white'){
-          body.style.backgroundColor = 'white';
-      }
-      if(e.target.id === 'blue'){
-        body.style.backgroundColor = 'blue';
+function addLanguage(language){
+        document.createElement('li')
+        const li = document.createElement('li')
+        li.innerHTML = `${language}`
+        document.querySelector('.Language').appendChild(li)
     }
-    if(e.target.id === 'yellow'){
-      body.style.backgroundColor = 'yellow';
-  }
-    })
-});
+    addLanguage('Python')
+
+    // optimized version
+    function addOptiLang(langName){
+        const li = document.createElement('li')
+        li.appendChild(document.createTextNode(langName))
+        document.querySelector('.Language').appendChild(li)
+    }
+    addOptiLang('Java')
+    addOptiLang('C++')

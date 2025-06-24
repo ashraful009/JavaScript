@@ -32,6 +32,7 @@
       border-radius: 20px;
       padding: 40px;
       max-width: 400px;
+      height: 600px;
       width: 100%;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
       text-align: center;
@@ -144,14 +145,16 @@
 }
 
 
+
+
     </style>
 </head>
 <body style="background-color:#212121; color:#fff;">
 
     <div id="wrapper">
       <h1>Number guessing game</h1>
-    <p>Try and guess a random number between 1 and 1000.</p>
-    <p>You have 10 attempts to guess the right number.</p>
+      <p>Try and guess a random number between 1 and 1000.</p>
+      <p>You have 10 attempts to guess the right number.</p>
     </br>
         <form class="form">
             <label2 for="guessField" id="guess">Guess a number</label>
@@ -164,7 +167,7 @@
             <p >Guesses Remaining: <span class="lastResult">10</span></p>
             <p class="lowOrHi"></p>
         </div>
-    </div>
+      
 </body>
 <script>
     
@@ -211,9 +214,12 @@ function validateGuess(guess) {
   }
 }
 
+
+
 function checkGuess(guess) {
   if (guess === randomNumber) {
     displayMessage(`Congratulations! You guessed it right`);
+    showCelebration();
     endGame();
   } else if (guess < randomNumber) {
     displayMessage(`Number is TOOO low`);
@@ -253,11 +259,10 @@ function newGame() {
     remaining.innerHTML = `${11 - numGuess} `;
     userInput.removeAttribute('disabled');
     startOver.removeChild(p);
-
+    document.getElementById('celebration').classList.add('hidden');
     playGame = true;
   });
 }
-
 
 
 </script>

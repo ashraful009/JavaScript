@@ -196,10 +196,8 @@ if (playGame) {
 function validateGuess(guess) {
   if (isNaN(guess)) {
     alert('PLease enter a valid number');
-  } else if (guess < 1) {
-    alert('PLease enter a number more than 0');
-  } else if (guess > 1000) {
-    alert('PLease enter a  number less than 100');
+  } else if (guess < 1 || guess > 1000) {
+    alert('PLease enter a number more than 0 and less than 1000');
   } else {
     prevGuess.push(guess);
     if (numGuess > 9) {

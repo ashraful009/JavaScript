@@ -19,22 +19,46 @@
    </div>
 </body>
 <script>
-    document.getElementById('images').addEventListener('click', function(e){
-        console.log("Clicked inside the UL");
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("Clicked inside the UL");
         
-    }, false);
+    // }, false);
 
-    document.getElementById('owl').addEventListener('click', function(e){
-        console.log("OWL clicked");
-        e.stopPropagation()
-    }, false)
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log("OWL clicked");
+    //     e.stopPropagation()
+    // }, false)
 
-    document.getElementById('google').addEventListener('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Google clicked');
+    // document.getElementById('google').addEventListener('click', function(e){
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //     console.log('Google clicked');
         
-    })
+    // })
+
+
+
+
+    ////           Note             ////
+
+    /* type, timestamp, preventDefault, target, toElement, srcElement
+    currentTarget, clientx, clienty, screenx, screeny, altkey
+    ctrlkey, shiftkey, keycode */ 
+
+
+
+
+     document.querySelector('#images').addEventListener('click', function(e){
+        //console.log(e.target.parentNode);
+        //console.log(e.target.id);
+        console.log(e.target.tagName);
+        if(e.target.tagName === 'IMG'){
+            console.log(e.target.id);
+            let removeIt = e.target.parentNode
+            removeIt.remove()
+        }
+        
+     })
 
 </script>
 </html>

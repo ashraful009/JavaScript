@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Meal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+    }
+    #sidebar {
+      width: 220px;
+      background-color: #343a40;
+      color: white;
+      padding: 20px;
+      height: 100vh;
+    }
+    #sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    #sidebar label {
+      display: block;
+      margin: 5px 0;
+    }
+    #main {
+      flex: 1;
+      padding: 20px;
+    }
+    .food-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 10px;
+      padding: 10px;
+      width: 200px;
+      display: inline-block;
+      vertical-align: top;
+    }
+    .food-card img {
+      width: 100%;
+      border-radius: 6px;
+    }
+    .food-card button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+    }
+    #cart {
+      margin-top: 20px;
+    }
+    #confirmForm input, #confirmForm select {
+      margin: 5px;
+      padding: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <h2>Filter by Meal</h2>
+    <label><input type="checkbox" value="breakfast"> Breakfast</label>
+    <label><input type="checkbox" value="lunch"> Lunch</label>
+    <label><input type="checkbox" value="dinner"> Dinner</label>
+  </div>
+
+  <div id="main">
+    <h1>Student Meal</h1>
+    <div id="foodContainer"></div>
+    <div id="cart">
+      <h2>Cart</h2>
+      <ul id="cartItems"></ul>
+      <h3>Total: $<span id="totalPrice">0</span></h3>
+      <form id="confirmForm">
+        <input type="text" id="username" placeholder="Your Name" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <select id="hall">
+          <option value="Hall-1">Hall-1</option>
+          <option value="Hall-2">Hall-2</option>
+          <option value="Hall-3">Hall-3</option>
+        </select>
+        <button type="submit">Confirm Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const foodItems = [
+      { name: 'Burger', price: 4, rating: 4.5, img: 'image/Burger.jpg', type: 'lunch' },
+      { name: 'Pasta', price: 5, rating: 4.2, img: 'image/image1.avif', type: 'dinner' },
+      { name: 'Paratha', price: 2, rating: 4.0, img: 'image/Paratha.jpg', type: 'breakfast' },
+      { name: 'Biryani', price: 6, rating: 4.8, img: 'image/Biryani.jpg', type: 'lunch' },
+    ];
+
+    let cart = [];
+
+    const renderFoodItems = () => {
+      const container = document.getElementById('foodContainer');
+      container.innerHTML = '';
+      const selectedMeals = Array.from(document.querySelectorAll('#sidebar input:checked')).map(cb => cb.value);
+
+      const filtered = selectedMeals.length ? foodItems.filter(item => selectedMeals.includes(item.type)) : foodItems;
+      filtered.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'food-card';
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>Price: $${item.price}</p>
+          <p>Rating: ${item.rating}</p>
+          <button onclick='addToCart("${item.name}", ${item.price})'>Add to Cart</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    const addToCart = (name, price) => {
+      const item = cart.find(i => i.name === name);
+      if (item) {
+        item.quantity++;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+      updateCart();
+    }
+
+    const updateCart = () => {
+      const list = document.getElementById('cartItems');
+      const total = document.getElementById('totalPrice');
+      list.innerHTML = '';
+      let totalSum = 0;
+      cart.forEach(item => {
+        totalSum += item.price * item.quantity;
+        list.innerHTML += `<li>${item.name} x${item.quantity} = $${item.price * item.quantity}</li>`;
+      });
+      total.textContent = totalSum.toFixed(2);
+    }
+
+    document.getElementById('confirmForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const phone = document.getElementById('phone').value;
+      const hall = document.getElementById('hall').value;
+      const orderTime = new Date().toLocaleString();
+
+      for (let item of cart) {
+        const payload = {
+          username,
+          phone,
+          food: item.name,
+          quantity: item.quantity,
+          price: item.price * item.quantity,
+          hall,
+          orderTime,
+        };
+
+        await fetch('https://script.google.com/macros/s/AKfycbzVpgfJcFfKsJq7aBFbM5Hz0jZ6yo05E8D4w2hx4qozkSFPKnGpGS_S9O1Yyl-c7l-L/exec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      }
+
+      alert('Order Placed Successfully!');
+      cart = [];
+      updateCart();
+      this.reset();
+    });
+
+    document.querySelectorAll('#sidebar input').forEach(cb => cb.addEventListener('change', renderFoodItems));
+
+    renderFoodItems();
+  </script>
+</body>
+</html>

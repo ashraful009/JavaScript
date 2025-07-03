@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Meal - Campus Food Delivery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            <h1>Student Meal</h1>
+        </div>
+        <div class="cart-icon" id="cartIcon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Filter Options</h3>
+            
+            <div class="filter-section">
+                <h4>Meal Type</h4>
+                <div class="filter-options">
+                    <div class="filter-option active" data-filter="all">
+                        <i class="fas fa-utensils"></i> All Meals
+                    </div>
+                    <div class="filter-option" data-filter="breakfast">
+                        <i class="fas fa-egg"></i> Breakfast
+                    </div>
+                    <div class="filter-option" data-filter="lunch">
+                        <i class="fas fa-hamburger"></i> Lunch
+                    </div>
+                    <div class="filter-option" data-filter="dinner">
+                        <i class="fas fa-fish"></i> Dinner
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h4>Dietary Preferences</h4>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <i class="fas fa-leaf"></i> Vegetarian
+                    </div>
+                    <div class="filter-option">
+                        <i class="fas fa-drumstick-bite"></i> Non-Vegetarian
+                    </div>
+                    <div class="filter-option">
+                        <i class="fas fa-wheat-alt"></i> Gluten-Free
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h4>Price Range</h4>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <i class="fas fa-rupee-sign"></i> Under ৳100
+                    </div>
+                    <div class="filter-option">
+                        <i class="fas fa-rupee-sign"></i> ৳100 - ৳200
+                    </div>
+                    <div class="filter-option">
+                        <i class="fas fa-rupee-sign"></i> Over ৳200
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-title">
+                <i class="fas fa-utensils"></i>
+                <h2>Today's Specials</h2>
+            </div>
+            
+            <div class="food-grid" id="foodGrid">
+                <!-- Food cards will be generated here -->
+            </div>
+            
+            <div class="order-form" id="orderForm">
+                <h3 class="form-title"><i class="fas fa-user"></i> Complete Your Order</h3>
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hall">Hall Name</label>
+                        <select id="hall" class="form-control" required>
+                            <option value="">Select your hall</option>
+                            <option value="hall-1">Hall 1</option>
+                            <option value="hall-2">Hall 2</option>
+                            <option value="hall-3">Hall 3</option>
+                            <option value="hall-4">Hall 4</option>
+                            <option value="hall-5">Hall 5</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">Special Instructions</label>
+                        <textarea id="notes" class="form-control" rows="3" placeholder="Any special requests?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-order">
+                        <i class="fas fa-paper-plane"></i> Submit Order
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+            
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be generated here -->
+            </div>
+            
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">৳0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery Fee:</span>
+                    <span>৳25.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax (5%):</span>
+                    <span id="tax">৳0.00</span>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Total:</span>
+                    <span id="total">৳0.00</span>
+                </div>
+                
+                <button class="checkout-btn" id="checkoutBtn">
+                    <i class="fas fa-check"></i> Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
